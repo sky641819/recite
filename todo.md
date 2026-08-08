@@ -133,6 +133,7 @@ function buildDailyWordPool(dailyCount) {
 - **当天已通过**：当天不再出现该单词
 
 ### 5. 单词源导入方案
+@./coca_5000.jsonl 
 - COCA 5000 词库按词频等级分 5 个 JSON 文件，按需加载
 - 首次启动时，将词库数据初始化到本地 Storage
 - 单词语音采用在线 TTS 合成（如腾讯云 TTS），在背诵时动态获取并缓存
@@ -170,3 +171,5 @@ function buildDailyWordPool(dailyCount) {
 1. 微信小程序最小化开发
 2. KISS原则，简单易懂，易于维护
 3. 轻量化，易测试
+
+## dev plan

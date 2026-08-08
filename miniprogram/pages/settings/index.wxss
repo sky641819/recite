@@ -1,0 +1,100 @@
+/**pages/settings/index.wxss**/
+
+.container {
+  padding: 30rpx;
+  padding-bottom: 80rpx;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.setting-card {
+  padding: 30rpx;
+  margin-bottom: 24rpx;
+}
+
+.setting-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.setting-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #2D2B3D;
+}
+
+.setting-value {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #6C5CE7;
+}
+
+.setting-slider {
+  width: 100%;
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 22rpx;
+  color: #A09DB5;
+  margin-top: 4rpx;
+}
+
+/* 新词比例选择 */
+.ratio-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.ratio-btn {
+  width: calc((100% - 32rpx) / 3);
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  background: #F5F3FF;
+  border-radius: 16rpx;
+  font-size: 26rpx;
+  color: #6B6880;
+  transition: all 0.2s ease;
+}
+
+.ratio-btn:active {
+  transform: scale(0.95);
+}
+
+.ratio-active {
+  background: linear-gradient(135deg, #6C5CE7, #A29BFE);
+  color: #FFFFFF;
+  font-weight: 600;
+  box-shadow: 0 4rpx 16rpx rgba(108, 92, 231, 0.25);
+}
+
+.setting-tip {
+  font-size: 24rpx;
+  color: #A09DB5;
+  margin-top: 20rpx;
+  line-height: 1.6;
+}
+
+/* 关于 */
+.about-section {
+  margin-top: 60rpx;
+  text-align: center;
+}
+
+.about-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #6B6880;
+  margin-bottom: 12rpx;
+}
+
+.about-desc {
+  font-size: 24rpx;
+  color: #A09DB5;
+  line-height: 1.8;
+}

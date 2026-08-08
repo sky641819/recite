@@ -1,0 +1,76 @@
+<!--pages/study/index.wxml-->
+<view class="container">
+  <!-- 进度条区域 -->
+  <view class="progress-section">
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{(currentIndex - 1) / totalCount * 100}}%"></view>
+    </view>
+    <view class="progress-text">第 {{currentIndex}} / {{totalCount}} 个</view>
+  </view>
+
+  <!-- 单词展示区域 -->
+  <view class="word-card" wx:if="{{currentWord}}">
+    <!-- 听音状态：隐藏单词 -->
+    <view class="listening-area" wx:if="{{!wordVisible}}">
+      <view class="speaker-icon {{voicePlaying ? 'pulse' : ''}}">🔊</view>
+      <view class="listening-hint">{{voicePlaying ? '正在朗读单词...' : '正在准备...'}}</view>
+      <view class="skip-btn" bindtap="replayWord">🔊 重播</view>
+    </view>
+    <!-- 单词文字：仅选择答案后展示 -->
+    <view class="word-text fade-in" wx:if="{{answered}}">{{currentWord.word}}</view>
+    <view class="phonetic-text fade-in" wx:if="{{answered && currentWord.phonetic}}">{{currentWord.phonetic}}</view>
+    <!-- 答题前的重播按钮 -->
+    <view class="replay-mini-btn" bindtap="replayWord" wx:if="{{wordVisible && !answered}}">🔊</view>
+  </view>
+
+  <!-- 选项区域 2x2：仅在单词可见时展示 -->
+  <view class="options-grid fade-in" wx:if="{{wordVisible && options.length > 0}}">
+    <view
+      wx:for="{{options}}"
+      wx:key="wordId"
+      class="option-btn {{answered ? (item.isCorrect ? 'option-correct' : (item.wordId === selectedOptionId ? 'option-wrong' : '')) : ''}}"
+      data-option="{{item}}"
+      bindtap="onSelectOption"
+    >
+      <view class="option-meaning">{{item.meaning}}</view>
+      <view class="option-icon" wx:if="{{answered}}">
+        <text wx:if="{{item.isCorrect}}">✓</text>
+        <text wx:elif="{{item.wordId === selectedOptionId}}">✗</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 导航栏：单词可见时显示 -->
+  <view class="nav-bar" wx:if="{{wordVisible}}">
+    <view class="nav-btn {{poolIdx <= 0 ? 'nav-btn-disabled' : ''}}" bindtap="goToPrevWord">
+      ← 上一个
+    </view>
+    <view class="nav-btn {{!answered ? 'nav-btn-disabled' : (isLastWord ? 'nav-btn-complete' : '')}}" bindtap="goToNextWord">
+      {{isLastWord ? '✓ 完成' : '下一个 →'}}
+    </view>
+  </view>
+</view>
+
+<!-- 完成弹窗 -->
+<view class="modal-mask" wx:if="{{showCompleteModal}}">
+  <view class="modal-card">
+    <view class="modal-icon">🎉</view>
+    <view class="modal-title">今日完成！</view>
+    <view class="modal-stats">
+      <view class="stat-item">
+        <view class="stat-value">{{stats.correct + stats.wrong}}</view>
+        <view class="stat-label">完成单词</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-value green">{{stats.correct}}</view>
+        <view class="stat-label">答对</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-value red" wx:if="{{stats.wrong > 0}}">{{stats.wrong}}</view>
+        <view class="stat-value" wx:else>0</view>
+        <view class="stat-label">答错</view>
+      </view>
+    </view>
+    <button class="modal-btn" bindtap="onConfirmComplete">返回首页</button>
+  </view>
+</view>

@@ -1,0 +1,50 @@
+<!--pages/settings/index.wxml-->
+<view class="container">
+  <!-- 每日单词数 -->
+  <view class="card setting-card">
+    <view class="setting-header">
+      <view class="setting-title">每日背诵单词数</view>
+      <view class="setting-value">{{dailyWordCount}} 个</view>
+    </view>
+    <slider
+      class="setting-slider"
+      min="10"
+      max="100"
+      step="5"
+      value="{{dailyWordCount}}"
+      activeColor="#6C5CE7"
+      backgroundColor="#E8E5F5"
+      block-size="20"
+      bindchange="onDailyCountChange"
+    />
+    <view class="slider-labels">
+      <text>10</text>
+      <text>100</text>
+    </view>
+  </view>
+
+  <!-- 新词比例 -->
+  <view class="card setting-card">
+    <view class="setting-header">
+      <view class="setting-title">新词比例</view>
+      <view class="setting-value">{{newWordRatioText}}</view>
+    </view>
+    <view class="ratio-options">
+      <view
+        wx:for="{{[10, 20, 30, 40, 50, 60, 70, 80, 90]}}"
+        wx:key="*this"
+        class="ratio-btn {{newWordRatio === item ? 'ratio-active' : ''}}"
+        data-ratio="{{item}}"
+        bindtap="onRatioSelect"
+      >{{item}}%</view>
+    </view>
+    <view class="setting-tip">每日学习单词中新词占比，剩余为艾宾浩斯复习词</view>
+  </view>
+
+  <!-- 关于 -->
+  <view class="about-section">
+    <view class="about-title">背单词 v1.0</view>
+    <view class="about-desc">基于艾宾浩斯遗忘曲线的单词背诵工具</view>
+    <view class="about-desc">词库：COCA 4000</view>
+  </view>
+</view>

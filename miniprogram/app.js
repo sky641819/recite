@@ -1,19 +1,22 @@
 // app.js
+const wordBank = require('./utils/wordbank');
+const storage = require('./utils/storage');
+
 App({
   onLaunch: function () {
-    this.globalData = {
-      // env 参数说明：
-      // env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会请求到哪个云环境的资源
-      // 此处请填入环境 ID, 环境 ID 可在微信开发者工具右上顶部工具栏点击云开发按钮打开获取
-      env: "",
-    };
-    if (!wx.cloud) {
-      console.error("请使用 2.2.3 或以上的基础库以使用云能力");
-    } else {
-      wx.cloud.init({
-        env: this.globalData.env,
-        traceUser: true,
-      });
+    // 初始化词库（仅首次需要）
+    if (!storage.isWordBankReady()) {
+      console.log('首次启动，初始化词库...');
+      storage.initWordBank(wordBank);
+      console.log('词库初始化完成，共', storage.getWordBankSize(), '个单词');
     }
-  },
+
+    // 清理旧数据
+    storage.cleanOldRecords();
+
+    // 确保设置存在
+    storage.getSettings();
+
+    this.globalData = {};
+  }
 });

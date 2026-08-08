@@ -1,27 +1,56 @@
 /**app.wxss**/
+page {
+  background: #F5F3FF;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-family: -apple-system, 'PingFang SC', 'Helvetica Neue', sans-serif;
+  color: #2D2B3D;
+}
+
+button {
+  background: initial;
+  padding: 0;
+  margin: 0;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button::after {
+  border: none;
+}
+
+/* 通用容器 */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-} 
-
-button {
-  background: initial;
+  min-height: 100vh;
 }
 
-button:focus{
-  outline: 0;
+/* 渐变主按钮 */
+.btn-primary {
+  background: linear-gradient(135deg, #6C5CE7 0%, #A29BFE 100%);
+  color: #FFFFFF;
+  border-radius: 24rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  box-shadow: 0 8rpx 24rpx rgba(108, 92, 231, 0.35);
+  transition: all 0.2s ease;
 }
 
-button::after{
-  border: none;
+.btn-primary:active {
+  transform: scale(0.96);
+  box-shadow: 0 4rpx 12rpx rgba(108, 92, 231, 0.25);
 }
 
-
-page {
-  background: #f6f6f6;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+/* 通用卡片 */
+.card {
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(108, 92, 231, 0.08);
+  box-sizing: border-box;
 }
